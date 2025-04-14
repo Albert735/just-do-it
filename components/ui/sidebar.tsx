@@ -58,8 +58,8 @@ export default function Sidebar() {
 
   return (
     <div className="hidden lg:flex flex-col justify-start h-full px-4 py-4 bg-white/5 border-r gap-[2rem]">
-      <div>
-        <h1>Just Do It</h1>
+      <div className="flex items-center gap-2 border-b pb-4">
+        <h1 className="text-2xl font-bold futura">Just Do It.</h1>
       </div>
       <div>
         <ul className="flex flex-col gap-2 ">
@@ -67,10 +67,10 @@ export default function Sidebar() {
             <li
               onClick={() => handleLinkClick(index)}
               key={index}
-              className={`flex items-center gap-3 hover:bg-white/10 hover:dark:text-white px-2 py-2 rounded-sm transition-all duration-200 ease-in-out ${
+              className={`flex items-center gap-3 hover:dark:bg-white/10 hover:dark:text-white hover:bg-black/20 hover:text-black  px-2 py-2 rounded-sm transition-all duration-200 ease-in-out ${
                 activeLink === index
-                  ? "bg-white text-black"
-                  : "hover:text-white"
+                  ? "dark:bg-white dark:text-black bg-black text-white "
+                  : "hover:dark:text-white"
               }`}
             >
               <span>{link.icon}</span>

@@ -17,7 +17,7 @@ export default function formNav() {
     <div className="flex justify-between items-center max-w-screen-xl mx-auto p-4">
       <div>
         <Link href="/">
-          <h1 className={`text-3xl font-bold `}>Just Do It</h1>
+          <h1 className={`text-3xl font-bold futura `}>Just Do It.</h1>
         </Link>
       </div>
       <div className="flex gap-4">

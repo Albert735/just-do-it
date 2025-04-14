@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <div className="flex justify-between items-center max-w-screen-xl mx-auto p-4">
       <div>
-        <h1 className={`text-3xl font-bold `}>Just Do It</h1>
+        <h1 className={`text-3xl font-bold futura`}>Just Do It.</h1>
       </div>
       <div className="flex gap-4">
         <ToggleTheme/>

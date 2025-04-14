@@ -120,3 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.futura {
+  font-family: var(--font-futura), sans-serif;
+}
