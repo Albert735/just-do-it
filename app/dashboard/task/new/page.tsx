@@ -29,7 +29,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col items-start justify-start h-[calc(100vh-14rem)] w-full">
         {showTask ? (
-          <div className="relative  w-full ">
+          <div className="relative  w-full h-[calc(100vh-14rem)]">
             <div className="absolute inset-0">
               <div className="flex flex-col items-center justify-start p-4 w-full h-full">
                 <div className="flex flex-col gap-4 w-full max-w-3xl">
@@ -46,7 +46,7 @@ export default function Page() {
                     placeholder="Task Description..."
                     rows={1}
                     onInput={handleAutoResize}
-                    className="w-full  h-[50rem] px-3 py-2 text-base text-gray-700 dark:text-white bg-white dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight mb-[5rem]"
+                    className="w-full px-3 py-2 text-base text-gray-700 dark:text-white bg-white dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight mb-[5rem]"
                   />
                 </div>
               </div>
