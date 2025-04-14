@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import FormNav from "@/components/ui/FormNav";
 import Link from "next/link";
 
-
 export default function page() {
   return (
     <>
