@@ -2,13 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { useState } from "react";
+// import { useState } from "react";
 import { GoHome } from "react-icons/go";
 import { IoIosAdd } from "react-icons/io";
 import { MdOutlinePriorityHigh } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
+import { usePathname } from "next/navigation";
 
 interface Props {
   name: string;
@@ -50,11 +51,7 @@ const SideLinks: Props[] = [
 ];
 
 export default function Sidebar() {
-  const [activeLink, setActiveLink] = useState(0);
-
-  const handleLinkClick = (index: number) => {
-    setActiveLink(index);
-  };
+  const pathname = usePathname();
 
   return (
     <div className="hidden lg:flex flex-col justify-start h-full px-4 py-4 bg-white/5 border-r gap-[2rem]">
@@ -64,17 +61,18 @@ export default function Sidebar() {
       <div>
         <ul className="flex flex-col gap-2 ">
           {SideLinks.map((link, index) => (
-            <li
-              onClick={() => handleLinkClick(index)}
-              key={index}
-              className={`flex items-center gap-3 hover:dark:bg-white/10 hover:dark:text-white hover:bg-black/20 hover:text-black  px-2 py-2 rounded-sm transition-all duration-200 ease-in-out ${
-                activeLink === index
-                  ? "dark:bg-white dark:text-black bg-black text-white "
-                  : "hover:dark:text-white"
-              }`}
-            >
-              <span>{link.icon}</span>
-              <Link href={link.href} className="text-[16px]">
+            <li key={index}>
+              <Link
+                href={link.href}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200
+                ${
+                  pathname === link.href
+                    ? "bg-black text-white dark:bg-white dark:text-black"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 hover:text-black dark:hover:text-white"
+                }
+              `}
+              >
+                <span className="text-lg">{link.icon}</span>
                 {link.name}
               </Link>
             </li>
