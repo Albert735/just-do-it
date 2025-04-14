@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { clsx } from "../../lib/utils";
-import { TypingAnimation } from "../../components/magicui/typing-animation";
-import { InteractiveHoverButton } from "../../components/magicui/interactive-hover-button";
-import { DotPattern } from "../../components/magicui/dot-pattern";
+import { clsx } from "../lib/utils";
+import { TypingAnimation } from "../components/magicui/typing-animation";
+import { InteractiveHoverButton } from "../components/magicui/interactive-hover-button";
+import { DotPattern } from "../components/magicui/dot-pattern";
 // import localFont from "next/font/local";
 import Link from "next/link";
-import Navbar from "../../components/ui/Navbar";
+import Navbar from "../components/ui/Navbar";
 
 // const futuraFont = localFont({
 //   src: "../../fonts/FuturaPT-Medium.woff2",

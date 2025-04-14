@@ -70,13 +70,16 @@ export default function Page() {
                 </span>
               )}
             </div>
-            <Button
-              type="submit"
-              variant={"default"}
-              className="font-bold py-2 px-4 rounded-lg"
-            >
-              <span>Log In</span>
-            </Button>
+
+            <Link href="/dashboard">
+              <Button
+                type="submit"
+                variant={"default"}
+                className="font-bold py-2 px-4 rounded-lg w-full"
+              >
+                <span>Log In</span>
+              </Button>
+            </Link>
           </form>
 
           <div className="flex flex-col gap-2">
