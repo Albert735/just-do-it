@@ -38,7 +38,7 @@ export default function Page() {
                     placeholder="Task Title"
                     rows={1}
                     onInput={handleAutoResize}
-                    className="w-full px-3 py-2 text-2xl font-bold text-gray-800 dark:text-white bg-white dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight"
+                    className="w-full px-3 py-2 text-2xl font-bold text-gray-800 dark:text-white bg-gray-100 dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight"
                   />
 
                   {/* Task Description Textarea */}
@@ -46,7 +46,7 @@ export default function Page() {
                     placeholder="Task Description..."
                     rows={1}
                     onInput={handleAutoResize}
-                    className="w-full px-3 py-2 text-base text-gray-700 dark:text-white bg-white dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight mb-[5rem]"
+                    className="w-full px-3 py-2 text-base text-gray-700 dark:text-white  bg-gray-100 dark:bg-white/10 rounded-md outline-none resize-none overflow-hidden leading-tight mb-[5rem]"
                   />
                 </div>
               </div>
