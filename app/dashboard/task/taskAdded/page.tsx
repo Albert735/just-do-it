@@ -2,6 +2,10 @@
 
 import { Reorder } from "framer-motion";
 import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { AiOutlineDelete } from "react-icons/ai";
+// import { ConfettiButton } from "@/components/magicui/confetti";
+import { ConfettiBoth } from "@/components/ui/confettiBoth";
 
 type Task = {
   id: number;
@@ -50,6 +54,7 @@ const initialTasks: Task[] = [
 
 export default function Page() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [complete, setComplete] = useState<Task[]>([]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
@@ -69,20 +74,28 @@ export default function Page() {
             value={task}
             className="cursor-grab active:cursor-grabbing"
           >
-            <div className="flex gap-4 p-5 bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-200 dark:border-white/10 transition-all hover:shadow-md">
+            <div className="flex gap-4 p-5 bg-white dark:bg-white/5 rounded-xl  border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
               {/* Optional Task ID or Icon */}
               <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg">
                 {task.id}
               </div>
 
               {/* Task Content */}
-              <div className="flex flex-col gap-1 overflow-hidden">
+              <div className="flex flex-col gap-1 overflow-hidden  w-full">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
                   {task.title}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
                   {task.description}
                 </p>
+              </div>
+
+              <div className="flex gap-2">
+                {/* Optional Task Actions */}
+                <ConfettiBoth />
+                <Button variant={"destructive"}>
+                  <AiOutlineDelete />
+                </Button>
               </div>
             </div>
           </Reorder.Item>
