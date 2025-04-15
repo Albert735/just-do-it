@@ -1,11 +1,19 @@
 "use client";
 
 import confetti from "canvas-confetti";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
 export function ConfettiBoth() {
-  const handleClick = () => {
+  const [complete, setComplete] = useState(false);
+
+  const handleCompleteClick = () => {
+    setComplete(true); // Mark the task as complete
+    triggerConfetti(); // Trigger the confetti
+  };
+
+  const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 3 seconds
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
 
@@ -37,8 +45,13 @@ export function ConfettiBoth() {
 
   return (
     <div className="relative">
-      <Button onClick={handleClick} variant={"outline"}>
-        Complete
+      <Button
+        onClick={handleCompleteClick}
+        variant={complete ? "success" : "outline"} // Dynamically set variant
+        size="default" // Set button size (optional)
+        className="text-black dark:text-white text-[12px]"
+      >
+        {complete ? "Completed" : "Complete"}
       </Button>
     </div>
   );

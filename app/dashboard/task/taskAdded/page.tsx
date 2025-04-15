@@ -58,7 +58,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
-      <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
+      <h1 className="text-2xl font-semibold text-gray-800 dark:text-white text-center sm:text-left">
         Tasks Added
       </h1>
 
@@ -66,7 +66,7 @@ export default function Page() {
         axis="y"
         values={tasks}
         onReorder={setTasks}
-        className="w-full max-w-2xl flex flex-col gap-4"
+        className="w-full xl:max-w-2xl flex flex-col gap-4"
       >
         {tasks.map((task) => (
           <Reorder.Item
@@ -74,14 +74,14 @@ export default function Page() {
             value={task}
             className="cursor-grab active:cursor-grabbing"
           >
-            <div className="flex gap-4 p-5 bg-white dark:bg-white/5 rounded-xl  border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
-              {/* Optional Task ID or Icon */}
-              <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg">
+            <div className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
+              {/* Task ID or Icon */}
+              <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg sm:mb-0 mb-2">
                 {task.id}
               </div>
 
               {/* Task Content */}
-              <div className="flex flex-col gap-1 overflow-hidden  w-full">
+              <div className="flex flex-col gap-1 overflow-hidden w-full">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
                   {task.title}
                 </h2>
@@ -90,10 +90,10 @@ export default function Page() {
                 </p>
               </div>
 
-              <div className="flex gap-2">
-                {/* Optional Task Actions */}
+              <div className="flex gap-2 sm:mt-0 mt-2 justify-between sm:w-auto w-full">
+                {/* Task Actions */}
                 <ConfettiBoth />
-                <Button variant={"destructive"}>
+                <Button variant={"destructive"} size="sm">
                   <AiOutlineDelete />
                 </Button>
               </div>
