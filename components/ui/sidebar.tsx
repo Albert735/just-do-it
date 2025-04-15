@@ -10,6 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 import { usePathname } from "next/navigation";
+import { CiBookmark } from "react-icons/ci";
 
 interface Props {
   name: string;
@@ -27,6 +28,11 @@ const SideLinks: Props[] = [
     name: "Add Task",
     href: "/dashboard/task/new",
     icon: <IoIosAdd size={20} />,
+  },
+  {
+    name: "Task",
+    href: "/dashboard/task/taskAdded",
+    icon: <CiBookmark size={20} />,
   },
   {
     name: "Priority Tasks",
