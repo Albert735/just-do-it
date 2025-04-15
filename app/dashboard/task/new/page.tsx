@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
 import { IoIosAdd } from "react-icons/io";
+import { IoMdArrowRoundUp } from "react-icons/io";
 
 export default function Page() {
   const [showTask, setShowTask] = useState(false);
@@ -16,6 +17,10 @@ export default function Page() {
   const handleAutoResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.currentTarget.style.height = "auto";
     e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+  };
+
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -62,6 +67,11 @@ export default function Page() {
             </span>
           </div>
         )}
+        <div className="flex absolute bottom-5 right-5 justify-end items-center">
+          <Button className="gap-2" onClick={handleScrollTop}>
+            <IoMdArrowRoundUp size={30} />
+          </Button>
+        </div>
       </div>
     </div>
   );

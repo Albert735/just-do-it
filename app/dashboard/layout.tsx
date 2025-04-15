@@ -9,7 +9,7 @@ export default function DashboardLayout({
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[230px_1fr]">
       {/* Sidebar */}
-      <aside className="border-r border-gray-200 dark:border-white/10 bg-white dark:bg-black">
+      <aside className="hidden lg:block border-r border-gray-200 dark:border-white/10 bg-white dark:bg-black ">
         <Sidebar />
       </aside>
 

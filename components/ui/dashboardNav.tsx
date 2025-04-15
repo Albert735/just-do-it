@@ -64,15 +64,18 @@ export default function DashboardNav() {
   };
 
   return (
-    <div className="flex justify-between items-start">
-      <div className="lg:hidden flex justify-center items-center p-2">
-        <CgMenuMotion size={26} onClick={toggleMenu} />
+    <div className="flex justify-between items-start w-full">
+      <div className="lg:hidden flex justify-center items-center p-2  h-full">
+        <CgMenuMotion size={30} onClick={toggleMenu} />
       </div>
-      <div className="flex justify-end w-full border-b p-2">
+      <div className="flex lg:hidden justify-start items-center p-2">
+        <h1 className={`text-2xl font-bold futura`}>Just Do It.</h1>
+      </div>
+      <div className="flex lg:justify-end lg:w-full border-b p-2 ">
         <ToggleTheme />
       </div>
       {menu && (
-        <div className="fixed top-0 flex flex-col gap-2 border-r p-2 w-full h-screen dark:bg-black/50  backdrop-blur-sm transition-all ease-in-out duration-300">
+        <div className="fixed lg:hidden top-0 flex flex-col gap-2 border-r p-2 w-full h-screen dark:bg-black/50  backdrop-blur-sm transition-all ease-in-out duration-300 z-10">
           <div className="absolute top-0 left-0 h-full w-[200px] border-r  dark:border-white/40 dark:bg-black  bg-white   dark:text-white ">
             <div className="flex flex-col justify-start items-center p-2 gap-[2rem] h-full">
               <div className="flex justify-between items-center p-2 w-full border-b-2">
