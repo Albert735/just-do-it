@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-// import { useState } from "react";
 import { GoHome } from "react-icons/go";
 import { IoIosAdd } from "react-icons/io";
 import { MdOutlinePriorityHigh } from "react-icons/md";
@@ -41,7 +40,7 @@ const SideLinks: Props[] = [
   },
   {
     name: "Completed Tasks",
-    href: "/dashboard?filter=completed",
+    href: "/dashboard/completed",
     icon: <FaCheck size={20} />,
   },
   {

@@ -46,7 +46,7 @@ const SideLinks: Props[] = [
   },
   {
     name: "Completed Tasks",
-    href: "/dashboard?filter=completed",
+    href: "/dashboard/completed",
     icon: <FaCheck size={20} />,
   },
   {

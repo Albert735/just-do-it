@@ -4,13 +4,7 @@ import React from "react";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
 import ToggleTheme from "./toggle-theme";
-// import localFont from "next/font/local";
 
-// const futuraFont = localFont({
-//   src: "../../fonts/Futura Condensed Extra Bold.otf",
-//   preload: true,
-//   variable: "--font-futura",
-// });
 
 export default function formNav() {
   return (

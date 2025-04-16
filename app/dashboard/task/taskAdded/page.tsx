@@ -13,15 +13,7 @@ import {
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useTask } from "../../../context/TaskContext";
 
-type Task = {
-  id: number;
-  title: string;
-  description: string;
-};
-
 export default function Page() {
-  // const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  const [taskAdded, setTaskAdded] = useState<Task[]>([]);
   const { tasks, setTasks, deleteTask } = useTask();
 
   return (
@@ -70,11 +62,11 @@ export default function Page() {
                 </div>
 
                 <div className="flex gap-2 sm:mt-0 mt-2 justify-between sm:w-auto w-full">
-                  <ConfettiBoth />
+                  <ConfettiBoth id={task.id} />
                   <Button
                     variant={"destructive"}
                     size="sm"
-                    onClick={() => deleteTask(task.id.toString())}
+                    onClick={() => deleteTask(task.id)}
                   >
                     <AiOutlineDelete />
                   </Button>

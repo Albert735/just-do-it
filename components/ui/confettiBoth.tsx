@@ -1,19 +1,39 @@
 "use client";
 
 import confetti from "canvas-confetti";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 // imported toast from sonner
 import { toast } from "sonner";
+import { useTask } from "@/app/context/TaskContext";
 
-export function ConfettiBoth() {
+type Props = {
+  id: string;
+};
+
+export function ConfettiBoth({ id }: Props) {
+  const { tasks, toggleTask } = useTask();
   const [complete, setComplete] = useState(false);
 
   const handleCompleteClick = () => {
-    setComplete(true); // Mark the task as complete
-    triggerConfetti(); // Trigger the confetti
+    const wasCompleted = complete;
+    toggleTask(id);
+    if (!wasCompleted) triggerConfetti();
+
+    toast("🎉 Task Completed", {
+      description: "You successfully completed a task.",
+      action: {
+        label: "Undo",
+        onClick: () => toggleTask(id),
+      },
+    });
   };
+
+  useEffect(() => {
+    const task = tasks.find((t) => t.id === id);
+    setComplete(task?.completed || false);
+  }, [tasks, id]);
 
   const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 3 seconds
@@ -49,16 +69,7 @@ export function ConfettiBoth() {
     <div className="relative">
       {/* placed toaster info here  */}
       <Button
-        onClick={() => {
-          handleCompleteClick();
-          toast("Congratulations 🎉", {
-            description: "Task completed successfully",
-            action: {
-              label: "Undo",
-              onClick: () => console.log("Undo"),
-            },
-          });
-        }}
+        onClick={handleCompleteClick}
         variant={complete ? "success" : "outline"}
         size="default"
         className="text-black dark:text-white text-[12px]"

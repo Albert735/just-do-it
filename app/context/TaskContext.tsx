@@ -46,7 +46,13 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Placeholder function to toggle task completion
-  const toggleTask = () => {};
+  const toggleTask = (id: string) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
 
   // Provide the state and functions to child components
   return (
