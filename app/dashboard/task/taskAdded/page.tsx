@@ -11,7 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-// import { useTask } from "../../../context/TaskContext";
+import { useTask } from "../../../context/TaskContext";
 
 type Task = {
   id: number;
@@ -19,61 +19,10 @@ type Task = {
   description: string;
 };
 
-const initialTasks: Task[] = [
-  {
-    id: 1,
-    title: "Spotify API Integration",
-    description:
-      "Integrate Spotify API to fetch playlists, artists, and albums for the dashboard UI.",
-  },
-  {
-    id: 2,
-    title: "UI Enhancements",
-    description:
-      "Improve typography, add spacing, hover effects, and responsive layouts across all pages.",
-  },
-  {
-    id: 3,
-    title: "Authentication",
-    description:
-      "Implement user authentication with JWT and protect task-related routes for security.",
-  },
-  {
-    id: 4,
-    title: "Persistent Storage",
-    description:
-      "Use localStorage or a database to save tasks between browser sessions.",
-  },
-  {
-    id: 5,
-    title: "Due Date Feature",
-    description:
-      "Add due date input to tasks and show overdue tasks with warning colors.",
-  },
-  {
-    id: 6,
-    title: "Priority Levels",
-    description:
-      "Allow users to mark tasks as low, medium, or high priority and filter by importance.",
-  },
-];
-
 export default function Page() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  // const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [taskAdded, setTaskAdded] = useState<Task[]>([]);
-
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-
-  // const { addTask } = useTask();
-
-  // const handleAddTask = () => {
-  //   if (title.trim() && description.trim()) {
-  //     addTask(title, description);
-  //     setTitle("");
-  //     setDescription("");
-  //   }
-  // };
+  const { tasks, setTasks, deleteTask } = useTask();
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
@@ -93,7 +42,7 @@ export default function Page() {
         </Popover>
       </div>
 
-      {taskAdded.length > 0 ? (
+      {tasks.length > 0 ? (
         <Reorder.Group
           axis="y"
           values={tasks}
@@ -107,15 +56,13 @@ export default function Page() {
               className="cursor-grab active:cursor-grabbing"
             >
               <div className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
-                {/* Task ID or Icon */}
                 <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg sm:mb-0 mb-2">
                   {task.id}
                 </div>
 
-                {/* Task Content */}
                 <div className="flex flex-col gap-1 overflow-hidden w-full">
                   <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
-                    {task.title.charAt(0).toUpperCase()}
+                    {task.title.charAt(0).toUpperCase() + task.title.slice(1)}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
                     {task.description}
@@ -123,9 +70,12 @@ export default function Page() {
                 </div>
 
                 <div className="flex gap-2 sm:mt-0 mt-2 justify-between sm:w-auto w-full">
-                  {/* Task Actions */}
                   <ConfettiBoth />
-                  <Button variant={"destructive"} size="sm">
+                  <Button
+                    variant={"destructive"}
+                    size="sm"
+                    onClick={() => deleteTask(task.id.toString())}
+                  >
                     <AiOutlineDelete />
                   </Button>
                 </div>
@@ -136,7 +86,7 @@ export default function Page() {
       ) : (
         <div className="flex flex-col justify-center items-center gap-6 px-4 py-8 h-[calc(100vh-14rem)] 0 w-full">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white text-center sm:text-left">
-            No Task Added{" "}
+            No Task Added
           </h2>
         </div>
       )}

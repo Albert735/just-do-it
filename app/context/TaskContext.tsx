@@ -16,6 +16,7 @@ type TaskContextType = {
   addTask: (title: string, description: string) => void; // Function to add a task
   deleteTask: (id: string) => void; // Function to delete a task
   toggleTask: (id: string) => void; // Function to toggle task completion
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
 // Create the context with default value undefined
@@ -25,27 +26,33 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
   // Local state to hold the list of tasks
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [nextId, setNextId] = useState(1);
 
   // Placeholder function to add a task
   const addTask = (title: string, description: string) => {
     const newTask = {
-      id: Date.now().toString(),
+      id: nextId.toString(),
       title,
       description,
       completed: false,
     };
-    setTasks((prev) => [newTask, ...prev]);
+    setTasks((prev) => [...prev, newTask]);
+    setNextId((prev) => prev + 1);
   };
 
   // Placeholder function to delete a task
-  const deleteTask = () => {};
+  const deleteTask = (id: string) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
 
   // Placeholder function to toggle task completion
   const toggleTask = () => {};
 
   // Provide the state and functions to child components
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, toggleTask }}>
+    <TaskContext.Provider
+      value={{ tasks, addTask, deleteTask, toggleTask, setTasks }}
+    >
       {children}
     </TaskContext.Provider>
   );
