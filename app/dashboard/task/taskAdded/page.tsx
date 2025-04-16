@@ -11,6 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+// import { useTask } from "../../../context/TaskContext";
 
 type Task = {
   id: number;
@@ -59,8 +60,20 @@ const initialTasks: Task[] = [
 
 export default function Page() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  // const [complete, setComplete] = useState<Task[]>([]);
   const [taskAdded, setTaskAdded] = useState<Task[]>([]);
+
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");
+
+  // const { addTask } = useTask();
+
+  // const handleAddTask = () => {
+  //   if (title.trim() && description.trim()) {
+  //     addTask(title, description);
+  //     setTitle("");
+  //     setDescription("");
+  //   }
+  // };
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
@@ -102,7 +115,7 @@ export default function Page() {
                 {/* Task Content */}
                 <div className="flex flex-col gap-1 overflow-hidden w-full">
                   <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
-                    {task.title}
+                    {task.title.charAt(0).toUpperCase()}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
                     {task.description}
