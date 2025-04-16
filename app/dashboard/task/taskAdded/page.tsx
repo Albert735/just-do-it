@@ -59,7 +59,8 @@ const initialTasks: Task[] = [
 
 export default function Page() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  const [complete, setComplete] = useState<Task[]>([]);
+  // const [complete, setComplete] = useState<Task[]>([]);
+  const [taskAdded, setTaskAdded] = useState<Task[]>([]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
@@ -79,45 +80,53 @@ export default function Page() {
         </Popover>
       </div>
 
-      <Reorder.Group
-        axis="y"
-        values={tasks}
-        onReorder={setTasks}
-        className="w-full xl:max-w-2xl flex flex-col gap-4"
-      >
-        {tasks.map((task) => (
-          <Reorder.Item
-            key={task.id}
-            value={task}
-            className="cursor-grab active:cursor-grabbing"
-          >
-            <div className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
-              {/* Task ID or Icon */}
-              <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg sm:mb-0 mb-2">
-                {task.id}
-              </div>
+      {taskAdded.length > 0 ? (
+        <Reorder.Group
+          axis="y"
+          values={tasks}
+          onReorder={setTasks}
+          className="w-full xl:max-w-2xl flex flex-col gap-4"
+        >
+          {tasks.map((task) => (
+            <Reorder.Item
+              key={task.id}
+              value={task}
+              className="cursor-grab active:cursor-grabbing"
+            >
+              <div className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
+                {/* Task ID or Icon */}
+                <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600 font-bold text-lg sm:mb-0 mb-2">
+                  {task.id}
+                </div>
 
-              {/* Task Content */}
-              <div className="flex flex-col gap-1 overflow-hidden w-full">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
-                  {task.title}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
-                  {task.description}
-                </p>
-              </div>
+                {/* Task Content */}
+                <div className="flex flex-col gap-1 overflow-hidden w-full">
+                  <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate">
+                    {task.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
+                    {task.description}
+                  </p>
+                </div>
 
-              <div className="flex gap-2 sm:mt-0 mt-2 justify-between sm:w-auto w-full">
-                {/* Task Actions */}
-                <ConfettiBoth />
-                <Button variant={"destructive"} size="sm">
-                  <AiOutlineDelete />
-                </Button>
+                <div className="flex gap-2 sm:mt-0 mt-2 justify-between sm:w-auto w-full">
+                  {/* Task Actions */}
+                  <ConfettiBoth />
+                  <Button variant={"destructive"} size="sm">
+                    <AiOutlineDelete />
+                  </Button>
+                </div>
               </div>
-            </div>
-          </Reorder.Item>
-        ))}
-      </Reorder.Group>
+            </Reorder.Item>
+          ))}
+        </Reorder.Group>
+      ) : (
+        <div className="flex flex-col justify-center items-center gap-6 px-4 py-8 h-[calc(100vh-14rem)] 0 w-full">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white text-center sm:text-left">
+            No Task Added{" "}
+          </h2>
+        </div>
+      )}
     </div>
   );
 }
