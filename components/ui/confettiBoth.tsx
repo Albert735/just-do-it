@@ -4,6 +4,8 @@ import confetti from "canvas-confetti";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+// imported toast from sonner
+import { toast } from "sonner";
 
 export function ConfettiBoth() {
   const [complete, setComplete] = useState(false);
@@ -21,7 +23,7 @@ export function ConfettiBoth() {
       if (Date.now() > end) return;
 
       confetti({
-        particleCount: 3,
+        particleCount: 2,
         angle: 60,
         spread: 55,
         startVelocity: 60,
@@ -29,7 +31,7 @@ export function ConfettiBoth() {
         colors: colors,
       });
       confetti({
-        particleCount: 3,
+        particleCount: 2,
         angle: 120,
         spread: 55,
         startVelocity: 60,
@@ -45,10 +47,20 @@ export function ConfettiBoth() {
 
   return (
     <div className="relative">
+      {/* placed toaster info here  */}
       <Button
-        onClick={handleCompleteClick}
-        variant={complete ? "success" : "outline"} // Dynamically set variant
-        size="default" // Set button size (optional)
+        onClick={() => {
+          handleCompleteClick();
+          toast("Congratulations 🎉", {
+            description: "Task completed successfully",
+            action: {
+              label: "Undo",
+              onClick: () => console.log("Undo"),
+            },
+          });
+        }}
+        variant={complete ? "success" : "outline"}
+        size="default"
         className="text-black dark:text-white text-[12px]"
       >
         {complete ? "Completed" : "Complete"}

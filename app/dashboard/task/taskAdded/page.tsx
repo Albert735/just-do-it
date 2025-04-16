@@ -4,7 +4,6 @@ import { Reorder } from "framer-motion";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AiOutlineDelete } from "react-icons/ai";
-// import { ConfettiButton } from "@/components/magicui/confetti";
 import { ConfettiBoth } from "@/components/ui/confettiBoth";
 
 type Task = {
