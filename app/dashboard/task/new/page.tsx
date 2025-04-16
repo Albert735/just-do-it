@@ -24,15 +24,15 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col justify-center items-center gap-6 px-4 py-8 ">
+      <div className="flex justify-between items-center w-full ">
         <h1 className="text-3xl font-bold">{showTask ? "Task" : "Add Task"}</h1>
         <Button className="gap-2">
           <IoIosAdd size={30} />
           Add
         </Button>
       </div>
-      <div className="flex flex-col items-start justify-start h-[calc(100vh-14rem)] w-full">
+      <div className="flex flex-col items-start justify-start h-[calc(100vh-14rem)] w-full ">
         {showTask ? (
           <div className="relative  w-full h-[calc(100vh-14rem)]">
             <div className="absolute inset-0">

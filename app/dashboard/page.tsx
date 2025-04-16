@@ -44,8 +44,8 @@ const cards: CardProps[] = [
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-4 h-full bg-amber-200">
-      <div className="grid grid-cols-6 grid-rows-4 gap-4 p-6 h-full">
+    <div className="flex flex-col gap-4 h-full">
+      <div className="flex flex-col lg:grid lg:grid-cols-6 lg:grid-rows-4 gap-4 p-6 h-full">
         {cards.map((card, index) => (
           <div
             key={index}

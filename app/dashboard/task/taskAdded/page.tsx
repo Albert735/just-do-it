@@ -5,6 +5,12 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ConfettiBoth } from "@/components/ui/confettiBoth";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 type Task = {
   id: number;
@@ -57,9 +63,21 @@ export default function Page() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 px-4 py-8">
-      <h1 className="text-2xl font-semibold text-gray-800 dark:text-white text-center sm:text-left">
-        Tasks Added
-      </h1>
+      <div className="flex justify-between items-center gap-4 w-full xl:max-w-2xl">
+        <h1 className="text-2xl font-semibold text-gray-800 dark:text-white text-center sm:text-left">
+          Tasks Added
+        </h1>
+        <Popover>
+          <PopoverTrigger>
+            <HiOutlineDotsHorizontal size={30} />
+          </PopoverTrigger>
+          <PopoverContent className="w-[100px] mr-[2rem] flex justify-center items-center">
+            <Button variant={"default"} size={"sm"}>
+              Clear All
+            </Button>
+          </PopoverContent>
+        </Popover>
+      </div>
 
       <Reorder.Group
         axis="y"
