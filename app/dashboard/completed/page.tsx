@@ -10,7 +10,7 @@ export default function Page() {
   const completedTasks = tasks.filter((task) => task.completed);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start px-4 py-8 bg-gray-50 dark:bg-black">
+    <div className="min-h-screen flex flex-col items-center justify-start px-4 py-8 ">
       <h1 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
         ✅ Tasks Completed
       </h1>

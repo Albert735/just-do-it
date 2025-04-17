@@ -20,7 +20,9 @@ export default function Page() {
             "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
           )}
         />
-        <TypingAnimation className={`text-[5rem] z-10 futura`}>
+        <TypingAnimation
+          className={` md:text-[5rem] text-[2.5rem] z-10 futura`}
+        >
           Just Do It.
         </TypingAnimation>
         <Link href="/form/logIn">

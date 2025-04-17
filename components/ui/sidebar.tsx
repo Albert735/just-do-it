@@ -61,7 +61,7 @@ export default function Sidebar() {
   return (
     <div className="hidden lg:flex flex-col justify-start h-full px-4 py-4 bg-white/5 border-r gap-[2rem]">
       <div className="flex items-center gap-2 border-b pb-4">
-        <h1 className="text-2xl font-bold futura">Just Do It.</h1>
+        <h1 className="md:text-2xl font-bold futura">Just Do It.</h1>
       </div>
       <div>
         <ul className="flex flex-col gap-2 ">

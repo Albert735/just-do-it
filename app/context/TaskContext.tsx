@@ -16,7 +16,7 @@ type TaskContextType = {
   addTask: (title: string, description: string) => void; // Function to add a task
   deleteTask: (id: string) => void; // Function to delete a task
   toggleTask: (id: string) => void; // Function to toggle task completion
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>; // setTasks allows components using the context to directly update the task list state
 };
 
 // Create the context with default value undefined
@@ -48,9 +48,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   // Placeholder function to toggle task completion
   const toggleTask = (id: string) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
+      prev.map((task) => (task.id === id ? { ...task, completed: true } : task))
     );
   };
 
