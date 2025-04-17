@@ -1,5 +1,7 @@
 "use client";
 
+// TaskContext.tsx (Updated)
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 // Define the shape of a single task
@@ -12,11 +14,14 @@ type Task = {
 
 // Define the shape of the context's value
 type TaskContextType = {
-  tasks: Task[]; // List of tasks
+  tasks: Task[]; // List of tasks (active tasks)
+  completedTasks: Task[]; // List of completed tasks
   addTask: (title: string, description: string) => void; // Function to add a task
-  deleteTask: (id: string) => void; // Function to delete a task
+  deleteTask: (id: string) => void; // Function to delete a task from active tasks
+  deleteCompletedTask: (id: string) => void; // Function to delete a completed task
   toggleTask: (id: string) => void; // Function to toggle task completion
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>; // setTasks allows components using the context to directly update the task list state
+  setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>; // setCompletedTasks to update completed tasks
 };
 
 // Create the context with default value undefined
@@ -24,11 +29,11 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 // Create the provider component
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
-  // Local state to hold the list of tasks
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
   const [nextId, setNextId] = useState(1);
 
-  // Placeholder function to add a task
+  // Function to add a new task
   const addTask = (title: string, description: string) => {
     const newTask = {
       id: nextId.toString(),
@@ -40,22 +45,35 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     setNextId((prev) => prev + 1);
   };
 
-  // Placeholder function to delete a task
+  // Function to delete a task from the active task list
   const deleteTask = (id: string) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
-  // Placeholder function to toggle task completion
-  const toggleTask = (id: string) => {
-    setTasks((prev) =>
-      prev.map((task) => (task.id === id ? { ...task, completed: true } : task))
-    );
+  // Function to delete a task from the completed task list
+  const deleteCompletedTask = (id: string) => {
+    setCompletedTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
-  // Provide the state and functions to child components
+  const toggleTask = (id: string) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
   return (
     <TaskContext.Provider
-      value={{ tasks, addTask, deleteTask, toggleTask, setTasks }}
+      value={{
+        tasks,
+        completedTasks,
+        addTask,
+        deleteTask,
+        deleteCompletedTask,
+        toggleTask,
+        setTasks,
+        setCompletedTasks,
+      }}
     >
       {children}
     </TaskContext.Provider>

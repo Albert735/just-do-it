@@ -1,10 +1,9 @@
+// ConfettiBoth.tsx (button to complete task)
 "use client";
 
 import confetti from "canvas-confetti";
 import { useState, useEffect } from "react";
-
 import { Button } from "@/components/ui/button";
-// imported toast from sonner
 import { toast } from "sonner";
 import { useTask } from "@/app/context/TaskContext";
 
@@ -18,14 +17,14 @@ export function ConfettiBoth({ id }: Props) {
 
   const handleCompleteClick = () => {
     const wasCompleted = complete;
-    toggleTask(id);
+    toggleTask(id); // Mark the task as completed
     if (!wasCompleted) triggerConfetti();
 
     toast("🎉 Task Completed", {
       description: "You successfully completed a task.",
       action: {
         label: "Undo",
-        onClick: () => toggleTask(id),
+        onClick: () => toggleTask(id), // Only toggle back if not completed
       },
     });
   };
@@ -36,12 +35,11 @@ export function ConfettiBoth({ id }: Props) {
   }, [tasks, id]);
 
   const triggerConfetti = () => {
-    const end = Date.now() + 3 * 1000; // 3 seconds
+    const end = Date.now() + 3 * 1000;
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
 
     const frame = () => {
       if (Date.now() > end) return;
-
       confetti({
         particleCount: 2,
         angle: 60,
@@ -58,7 +56,6 @@ export function ConfettiBoth({ id }: Props) {
         origin: { x: 1, y: 0.5 },
         colors: colors,
       });
-
       requestAnimationFrame(frame);
     };
 
@@ -67,8 +64,8 @@ export function ConfettiBoth({ id }: Props) {
 
   return (
     <div className="relative">
-      {/* placed toaster info here  */}
       <Button
+        disabled={complete}
         onClick={handleCompleteClick}
         variant={complete ? "success" : "outline"}
         size="default"

@@ -3,14 +3,14 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { useTask } from "../../context/TaskContext";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
-  const { tasks } = useTask();
-
+  const { tasks, deleteTask } = useTask();
   const completedTasks = tasks.filter((task) => task.completed);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start px-4 py-8 ">
+    <div className="min-h-screen flex flex-col items-center justify-start px-4 py-8">
       <h1 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
         ✅ Tasks Completed
       </h1>
@@ -31,12 +31,19 @@ export default function Page() {
                   {task.description}
                 </p>
               </div>
+              <Button
+                variant={"destructive"}
+                size="sm"
+                onClick={() => deleteTask(task.id)} // Delete function works here
+              >
+                Delete
+              </Button>
             </div>
           ))
         ) : (
-          <p className="text-gray-500 dark:text-gray-400 text-center">
-            No tasks have been completed yet.
-          </p>
+          <div className="flex flex-col justify-center items-center gap-2 p-4 bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-700 rounded-xl shadow-sm">
+            <p>No completed tasks yet</p>
+          </div>
         )}
       </div>
     </div>
