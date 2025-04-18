@@ -3,7 +3,7 @@
 
 import confetti from "canvas-confetti";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useTask } from "@/app/context/TaskContext";
 
