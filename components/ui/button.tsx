@@ -62,3 +62,6 @@ function Button({
 }
 
 export { Button, buttonVariants };
+// If needed in the future, uncomment the line below to export ButtonProps from a separate file.
+// export type { ButtonProps } from "./button-types";
+
