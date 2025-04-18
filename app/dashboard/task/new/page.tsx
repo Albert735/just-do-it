@@ -102,7 +102,7 @@ export default function Page() {
               onClick={toggleTask}
               className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-gray-600"
             >
-              <IoIosAdd size={26} /> Add a new task
+              <IoIosAdd size={26} /> Add a new task here
             </span>
           </div>
         )}
