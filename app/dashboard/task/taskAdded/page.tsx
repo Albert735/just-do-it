@@ -33,7 +33,7 @@ export default function Page() {
               className="cursor-grab active:cursor-grabbing"
             >
               <div className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 transition-all hover:shadow-sm">
-                <div className="flex items-center justify-center h-10 w-12 rounded-md bg-blue-100 text-blue-600 font-bold text-lg sm:mb-0 mb-2">
+                <div className="flex items-center justify-center h-10 w-12 rounded-md bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300 font-bold text-lg sm:mb-0 mb-2">
                   <LuListTodo size={16} />
                 </div>
                 <div className="flex flex-col gap-1 overflow-hidden w-full">

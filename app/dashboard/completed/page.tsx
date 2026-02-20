@@ -20,14 +20,14 @@ export default function Page() {
           completedTasks.map((task) => (
             <div
               key={task.id}
-              className="flex flex-row justify-start items-center gap-4 p-4 bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-700 rounded-xl shadow-sm"
+              className="flex flex-row justify-start items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl shadow-sm"
             >
-              <CheckCircle className="text-green-500" size={20} />
+              <CheckCircle className="text-slate-500" size={20} />
               <div className="flex flex-col w-full max-h-[7rem] overflow-hidden">
-                <h2 className="text-lg font-semibold text-green-800 dark:text-green-300 line-through">
+                <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-300 line-through">
                   {task.title}
                 </h2>
-                <p className="text-sm text-green-700 dark:text-green-400 line-through">
+                <p className="text-sm text-slate-500 dark:text-slate-400 line-through">
                   {task.description}
                 </p>
               </div>
@@ -41,8 +41,8 @@ export default function Page() {
             </div>
           ))
         ) : (
-          <div className="flex flex-col justify-center items-center gap-2 p-4 bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-700 rounded-xl shadow-sm">
-            <p>No completed tasks yet</p>
+          <div className="flex flex-col justify-center items-center gap-2 p-4 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl shadow-sm">
+            <p className="text-slate-500 dark:text-slate-400">No completed tasks yet</p>
           </div>
         )}
       </div>

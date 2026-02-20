@@ -48,7 +48,7 @@ export default function Page() {
                 {...register("email", { required: "Email is required" })}
               />
               {errors.email && (
-                <span className="text-red-500 text-sm">
+                <span className="text-slate-600 dark:text-slate-400 text-sm">
                   {errors.email.message}
                 </span>
               )}
@@ -65,7 +65,7 @@ export default function Page() {
                 {...register("password", { required: "Password is required" })}
               />
               {errors.password && (
-                <span className="text-red-500 text-sm">
+                <span className="text-slate-600 dark:text-slate-400 text-sm">
                   {errors.password.message}
                 </span>
               )}

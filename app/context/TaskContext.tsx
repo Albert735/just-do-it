@@ -2,14 +2,17 @@
 
 // TaskContext.tsx (Updated)
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 // Define the shape of a single task
-type Task = {
+export type TaskStatus = "todo" | "in-progress" | "done";
+
+export type Task = {
   id: string;
   title: string;
   description: string;
   completed: boolean;
+  status: TaskStatus; // Added for Kanban support
 };
 
 // Define the shape of the context's value
@@ -20,6 +23,7 @@ type TaskContextType = {
   deleteTask: (id: string) => void; // Function to delete a task from active tasks
   deleteCompletedTask: (id: string) => void; // Function to delete a completed task
   toggleTask: (id: string) => void; // Function to toggle task completion
+  updateTaskStatus: (id: string, newStatus: TaskStatus) => void; // Function for Kanban
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>; // setTasks allows components using the context to directly update the task list state
   setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>; // setCompletedTasks to update completed tasks
 };
@@ -33,13 +37,32 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
   const [nextId, setNextId] = useState(1);
 
+  // Load from localStorage if available
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("just-do-it-tasks");
+    const savedCompleted = localStorage.getItem("just-do-it-completed");
+    const savedNextId = localStorage.getItem("just-do-it-nextId");
+
+    if (savedTasks) setTasks(JSON.parse(savedTasks));
+    if (savedCompleted) setCompletedTasks(JSON.parse(savedCompleted));
+    if (savedNextId) setNextId(JSON.parse(savedNextId));
+  }, []);
+
+  // Save to localStorage when state changes
+  useEffect(() => {
+    localStorage.setItem("just-do-it-tasks", JSON.stringify(tasks));
+    localStorage.setItem("just-do-it-completed", JSON.stringify(completedTasks));
+    localStorage.setItem("just-do-it-nextId", JSON.stringify(nextId));
+  }, [tasks, completedTasks, nextId]);
+
   // Function to add a new task
   const addTask = (title: string, description: string) => {
-    const newTask = {
+    const newTask: Task = {
       id: nextId.toString(),
       title,
       description,
       completed: false,
+      status: "todo",
     };
     setTasks((prev) => [...prev, newTask]);
     setNextId((prev) => prev + 1);
@@ -56,12 +79,49 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const toggleTask = (id: string) => {
+    let completedTaskToMove: Task | undefined;
+    
+    // Check if task is in active tasks
+    setTasks((prev) => {
+      const taskIndex = prev.findIndex(t => t.id === id);
+      if (taskIndex !== -1) {
+        const updatedTask = { ...prev[taskIndex], completed: true, status: "done" as TaskStatus };
+        completedTaskToMove = updatedTask;
+        return prev.filter(t => t.id !== id);
+      }
+      return prev;
+    });
+
+    if (completedTaskToMove) {
+      setCompletedTasks(prev => [...prev, completedTaskToMove!]);
+      return;
+    }
+
+    // Check if task is in completed tasks (un-toggling)
+    setCompletedTasks(prev => {
+      const taskIndex = prev.findIndex(t => t.id === id);
+      if (taskIndex !== -1) {
+        const updatedTask = { ...prev[taskIndex], completed: false, status: "todo" as TaskStatus };
+        setTasks(prevTasks => [...prevTasks, updatedTask]);
+        return prev.filter(t => t.id !== id);
+      }
+      return prev;
+    });
+  };
+
+  const updateTaskStatus = (id: string, newStatus: TaskStatus) => {
+    if (newStatus === "done") {
+      toggleTask(id); // Use existing logic to move to completed
+      return;
+    }
+
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id ? { ...task, status: newStatus } : task
       )
     );
   };
+
   return (
     <TaskContext.Provider
       value={{
@@ -71,6 +131,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         deleteTask,
         deleteCompletedTask,
         toggleTask,
+        updateTaskStatus,
         setTasks,
         setCompletedTasks,
       }}
